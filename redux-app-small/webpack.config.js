@@ -12,6 +12,39 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
+    devServer: {
+        // contentBase: path.resolve(__dirname, 'dist'),
+        // open: true,
+        // clientLogLevel: 'silent',
+        // port: 9000,
+
+        historyApiFallback: true,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+        client: {
+          webSocketURL: {
+            hostname: "localhost",
+          },
+        },
+        // port: "8089",
+        https: true,
+        allowedHosts: "all",
+
+        // contentBase
+        static : {
+            directory : path.join(__dirname, "dist")
+        },
+        port: 9000,
+        
+        // publicPath
+        // devMiddleware:{
+        //     publicPath: "https://localhost:9000/dist/",
+        // },
+
+        // hotOnly
+        // hot: "only",
+    },
     module: {
         rules: [
             {
@@ -74,3 +107,16 @@ module.exports = {
 3. browserslist config file in current or parent directories.
 4. BROWSERSLIST environment variable.
 5. If the above methods did not produce a valid result Browserslist will use defaults: > 0.5%, last 2 versions, Firefox ESR, not dead. */
+
+
+/* The webpack-dev-server package is a development dependency that can streamline the development process for our React app. 
+Remember, every time we make a change to our React application we need to recompile our bundle.js file. Fortunately, the webpack-dev-server can do this for us by watching for file changes. 
+It can also server our index.html file in our dist directory as a web server instead of from a file:// resource that we’ve been loading it with. 
+This is critical in cross origin requests (CORs) and loading resources/assets for our application.
+
+Our devServer property will take a couple of options. 
+First, the contentBase is the path to our output directory dist where our index.html and bundle.js file are found.This is going to be the base where our devServer serves the files. By default, any index.html file will be served as is the case with any other web server. 
+The open property tells the devServer to open a browser window for the application. 
+The clientLogLevel is set to silent so all server requests and long pull requests will not be logged to the console.
+We can start the devServer by setting up a node startup script in our package.json file: "develop":"webpack-dev-server"/"start".
+*/

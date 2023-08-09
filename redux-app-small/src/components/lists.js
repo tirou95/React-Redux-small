@@ -29,7 +29,7 @@ function Task({ task }) {
               type: "changed",
               task: {
                 ...task,
-                text: e.target.value,
+                activity: e.target.value,
               },
             });
           }}
