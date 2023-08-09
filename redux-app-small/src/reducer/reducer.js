@@ -28,14 +28,13 @@ export function useTasksDispatchContext() {
 }
 
 function taskReducer(tasks, action) {
-  console.log("taskreducer");
   switch (action.type) {
     case "added": {
       return [
         ...tasks,
         {
           id: action.id,
-          text: action.text,
+          activity: action.text,
           done: false,
         },
       ];
@@ -51,7 +50,7 @@ function taskReducer(tasks, action) {
     }
     case "deleted": {
       return tasks.filter((t) => {
-        return t.id != action.id;
+        return t.id !== action.id;
       });
     }
     default:

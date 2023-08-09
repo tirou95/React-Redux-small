@@ -4,7 +4,6 @@ import "../index.css";
 
 export default function AddBox() {
   const [text, setText] = useState("");
-  let nextID = 3;
   const dispatch = useTasksDispatchContext();
   return (
     <>
@@ -12,16 +11,17 @@ export default function AddBox() {
         placeholder="Add Tasks"
         value={text}
         onChange={(e) => {
-          setText(e.text.value);
+          setText(e.target.value);
         }}
       />
       <button
         onClick={() => {
           dispatch({
             type: "added",
-            id: nextID + 1,
+            id: nextID++,
             text: text,
           });
+          setText("");
         }}
       >
         Add
@@ -29,3 +29,7 @@ export default function AddBox() {
     </>
   );
 }
+
+// initializing the id value globally to avoid re-initialization on each render
+let nextID = 3;
+
